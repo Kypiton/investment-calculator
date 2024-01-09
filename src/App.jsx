@@ -12,6 +12,8 @@ function App() {
     duration: 2,
   });
 
+  const inputIsValid = state.duration >= 1;
+
   function handleInput(inputIdentifier, newValue) {
     setState(prevUser => {
       return {
@@ -29,9 +31,13 @@ function App() {
       <section id='user-input'>
         <UserInput handleInput={handleInput} state={state} />
       </section>
-      <table id='result'>
-        <Results state={state} />
-      </table>
+      {inputIsValid ? (
+        <table id='result'>
+          <Results state={state} />
+        </table>
+      ) : (
+        <p className='center'>Duration must be more than 0.</p>
+      )}
     </>
   );
 }
